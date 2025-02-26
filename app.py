@@ -1,8 +1,7 @@
 from flask import Flask
-from flask_api import FlaskAPI
 from resources import user_management, remote_announce, remote_update, software_settings
 
-app = FlaskAPI(__name__)
+app = Flask(__name__)
 
 # 注册 API 资源
 app.register_blueprint(user_management.bp, url_prefix='/user-management')
@@ -14,5 +13,4 @@ app.register_blueprint(software_settings.bp, url_prefix='/software-settings')
 def index():
     return {"message": "管理端 API 已启动"}
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# Vercel 不使用 __main__ 运行，而是直接提供 app 变量
